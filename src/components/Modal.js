@@ -24,6 +24,14 @@ export default class CustomModal extends Modal {
     }, cb);
   };
 
+  onEndEditing = (data, cb) => {
+    const value = data.payload;
+    console.log('[DApp] value: ', data.payload);
+    this.setState({
+      concept: value
+    }, cb);
+  }
+
   onSendPressed = (data, cb) => {
     const address = this.props.context.partner.ethereumAddress;
     this.setState(() => ({
@@ -78,8 +86,8 @@ export default class CustomModal extends Modal {
         </view>
         <text style={styles.toLabelText} type='footnote'>Concept</text>
         <view style={styles.partnerNameContainer}>
-          <textInput style={styles.body}
-            value={this.state.concept}
+          <textInput style={[styles.body, { flex: 2, lineHeight: 25 }]}
+            onEndEditing={this.onEndEditing}
           />
         </view>
         <view style={styles.buttonContainer}>
