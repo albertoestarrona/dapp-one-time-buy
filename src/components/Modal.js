@@ -24,20 +24,6 @@ export default class CustomModal extends Modal {
     }, cb);
   };
 
-  onRequestPressed = (data, cb) => {
-    sendMessage(this.props.context.partner.identityKey, {
-      shouldSend: true,
-      params: {
-        requester: this.props.context.account,
-        payer: this.props.context.partner,
-        amount: this.state.amount,
-        currency: this.state.currency,
-        status: 'pending',
-      },
-      type: 'REQUEST_MONEY',
-    }, cb);
-  };
-
   onSendPressed = (data, cb) => {
     const address = this.props.context.partner.ethereumAddress;
     this.setState(() => ({
@@ -144,6 +130,8 @@ const styles = {
   },
   closeText: {
     marginTop: 20,
+    marginLeft: 5,
+    marginRight: 5,
     color: 'black',
   },
 };

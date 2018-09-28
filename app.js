@@ -10,7 +10,6 @@ import {
 } from 'pangea-sdk';
 import Modal from './src/components/Modal';
 import SendMessage from './src/components/SendMessage';
-import RequestMessage from './src/components/RequestMessage';
 
 function showMainModal(payload, cb) {
   // obtain a new modal id
@@ -42,27 +41,9 @@ setOpenHandler((payload, cb) => {
 setMessageRenderer((payload, cb) => {
   const { message } = payload;
 
-  let Component = null;
+  const Component = SendMessage;
   let propsToPass = {};
-  switch (message.type) {
-    case 'SEND_MONEY':
-      Component = SendMessage;
-      break;
-    case 'REQUEST_MONEY':
-      Component = RequestMessage;
-      propsToPass = {
-        onSelectSend: (payload, cb) => {
-          showMainModal({
-            ...payload,
-            initialData: {
-              amount: message.params.amount,
-              currency: message.params.currency,
-            },
-          }, cb);
-        },
-      };
-      break;
-  }
+
   if (Component === null) {
     cb(null, {});
   }
