@@ -30,7 +30,7 @@ export default class CustomModal extends Modal {
     this.setState({
       concept: value
     }, cb);
-  }
+  };
 
   onSendPressed = (data, cb) => {
     const address = this.props.context.partner.ethereumAddress;
